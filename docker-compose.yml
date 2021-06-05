@@ -1,0 +1,46 @@
+version: '3.4'
+
+networks:
+  QuickRentalHousingBridgeNetwork:
+    name: QuickRentalHousingBridgeNetwork
+    driver: bridge
+
+services:
+  quickrentalhousing.is:
+    image: ${DOCKER_REGISTRY-}quickrentalhousing.is
+    build:
+      context: .
+      dockerfile: QuickRentalHousing.IS/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    networks:
+      - QuickRentalHousingBridgeNetwork
+    ports:
+      - "4000:80"
+      - "5000:443"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssword1
+    networks:
+      - QuickRentalHousingBridgeNetwork
+    container_name: QuickRentalHousing.ApiDb
+    ports:
+      - "1434:1433"
+
+  quickrentalhousing.api:
+    image: ${DOCKER_REGISTRY-}quickrentalhousing.api
+    build:
+      context: .
+      dockerfile: QuickRentalHousing.Api/Dockerfile
+    networks:
+      - QuickRentalHousingBridgeNetwork
+    ports:
+      - "5001:443"
+

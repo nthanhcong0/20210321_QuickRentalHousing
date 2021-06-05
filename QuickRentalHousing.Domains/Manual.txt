@@ -1,0 +1,25 @@
+﻿---------------------------------------
+How to apply migration to DB
+---------------------------------------
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains database update
+
+---------------------------------------
+How to add new migration
+---------------------------------------
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains migrations add 
+
+---------------------------------------
+How to remove new migration
+---------------------------------------
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains migrations remove
+
+---------------------------------------
+Required first step
+---------------------------------------
+dotnet tool install dotnet-ef --global
+dotnet tool update dotnet-ef --global
+
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains database drop -f &&
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains migrations remove &&
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains migrations add InitDb &&
+dotnet ef -s QuickRentalHousing.Domains -p QuickRentalHousing.Domains database update

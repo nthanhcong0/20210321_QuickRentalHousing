@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>cea27baf-7cd2-4c12-929d-5ae4de516019</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ITHenry.Commons.EntityFrameworkCore">
+      <HintPath>..\Libraries\ITHenry.Commons.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="ITHenry.Commons.DependencyInjection">
+      <HintPath>..\Libraries\ITHenry.Commons.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="ITHenry.Commons">
+      <HintPath>..\Libraries\ITHenry.Commons.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuickRentalHousing.Domains\QuickRentalHousing.Domains.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\QuickRentalHousing.Services\QuickRentalHousing.Services.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\QuickRentalHousing.Api.Models\QuickRentalHousing.Api.Models.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

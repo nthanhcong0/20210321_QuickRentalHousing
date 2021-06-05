@@ -1,0 +1,67 @@
+﻿@page "/managetenants"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+
+<h3>Manage Tenants</h3>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label asp-for="FirstName">First Name</label>
+        <input class="form-control" asp-for="FirstName" autofocus>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="MiddleName">Middle Name</label>
+        <input class="form-control" asp-for="MiddleName">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="LastName">Last Name</label>
+        <input class="form-control" asp-for="LastName">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Genre">Genre</label>
+        <input class="form-control" asp-for="Genre">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="PID">PID</label>
+        <input class="form-control" asp-for="PID">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="DOB">DOB</label>
+        <input class="form-control" asp-for="DOB">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="AddressNumber">Address Number</label>
+        <input class="form-control" asp-for="AddressNumber">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Street">Street</label>
+        <input class="form-control" asp-for="Street">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="District">District</label>
+        <input class="form-control" asp-for="District">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Occupation">Occupation</label>
+        <input class="form-control" asp-for="Occupation">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Description">Description</label>
+        <input class="form-control" asp-for="Description">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-row">
+        <ul class="text-danger">
+            @*@if (Model.Errors != null)
+                {
+                    foreach (var item in Model.Errors)
+                    {
+                        <li>@item</li>
+                    }
+                }*@
+        </ul>
+    </div>
+</div>
+<button class="btn btn-primary" name="button" value="login">Create</button>
+<button type="reset" class="btn btn-secondary" name="button" value="cancel">Reset</button>
+@code { }

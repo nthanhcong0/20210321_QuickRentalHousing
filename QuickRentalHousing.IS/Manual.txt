@@ -1,0 +1,26 @@
+﻿---------------------------------------
+How to apply migration to DB
+---------------------------------------
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS database update -c ApplicationDbContext
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS database update -c ConfigurationDbContext
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS database update -c PersistedGrantDbContext
+
+---------------------------------------
+How to add new migration
+---------------------------------------
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations add -c ApplicationDbContext -o Data/ApplicationDbContextMigrations 
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations add -c ConfigurationDbContext -o Data/ConfigurationDbContextMigrations 
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations add -c PersistedGrantDbContext -o Data/PersistedGrantDbContextMigrations 
+
+---------------------------------------
+How to remove new migration
+---------------------------------------
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations remove -c ApplicationDbContext
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations remove -c ConfigurationDbContext
+dotnet ef -s QuickRentalHousing.IS -p QuickRentalHousing.IS migrations remove -c PersistedGrantDbContext
+
+---------------------------------------
+Required first step
+---------------------------------------
+dotnet tool install dotnet-ef --global
+dotnet tool update dotnet-ef --global

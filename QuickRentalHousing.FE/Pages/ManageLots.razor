@@ -1,0 +1,55 @@
+﻿@page "/managelots"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+
+<h3>Manage Lots</h3>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label asp-for="AddressNumber">Address Number</label>
+        <input class="form-control" asp-for="AddressNumber" autofocus>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="RentalFee">Rental Fee</label>
+        <input class="form-control" asp-for="RentalFee">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="TotalArea">Total Area</label>
+        <input class="form-control" asp-for="TotalArea">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="ExpiredTime">Expired Time</label>
+        <input class="form-control" asp-for="ExpiredTime">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="LotStatus">Lot Status</label>
+        <input class="form-control" asp-for="LotStatus">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Street">Street</label>
+        <input class="form-control" asp-for="Street">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="District">District</label>
+        <input class="form-control" asp-for="District">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Description">Description</label>
+        <input class="form-control" asp-for="Description">
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-row">
+        <ul class="text-danger">
+            @*@if (Model.Errors != null)
+                {
+                    foreach (var item in Model.Errors)
+                    {
+                        <li>@item</li>
+                    }
+                }*@
+        </ul>
+    </div>
+</div>
+<button class="btn btn-primary" name="button" value="login">Create</button>
+<button type="reset" class="btn btn-secondary" name="button" value="cancel">Reset</button>
+@code { }
