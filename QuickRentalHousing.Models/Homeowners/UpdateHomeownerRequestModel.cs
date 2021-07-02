@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QuickRentalHousing.Api.Models.Homeowners
+namespace QuickRentalHousing.Models.Homeowners
 {
-    public class CreateHomeownerModel
+    public class UpdateHomeownerRequestModel
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -14,7 +15,7 @@ namespace QuickRentalHousing.Api.Models.Homeowners
         public string AddressNumber { get; set; }
         public Guid? StreetId { get; set; }
         public string StreetName { get; set; }
-        public int DisttrictId { get; set; }
+        public int DistrictId { get; set; }
         public IEnumerable<string> PhoneNumbers { get; set; }
         public IEnumerable<string> Emails { get; set; }
         public string Description { get; set; }

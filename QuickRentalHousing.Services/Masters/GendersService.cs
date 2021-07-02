@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using QuickRentalHousing.Domains.Entities.Masters;
+﻿using QuickRentalHousing.Domains.Entities.Masters;
 using QuickRentalHousing.Domains.Infrastructures;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuickRentalHousing.Services.Masters
 {
@@ -15,18 +13,7 @@ namespace QuickRentalHousing.Services.Masters
             _repository = repository;
         }
 
-        public async Task<dynamic> GetSelectListAsync()
-        {
-            var result = await GetAllActive().Select(x => new
-            {
-                x.Id,
-                x.Name,
-            }).ToArrayAsync();
-
-            return result;
-        }
-
-        private IQueryable<Gender> GetAllActive(bool isTracking = false)
+        public IQueryable<Gender> GetAllActive(bool isTracking = false)
         {
             var result = _repository.GetAll(isTracking)
                 .Where(x => x.IsActive);
@@ -37,6 +24,6 @@ namespace QuickRentalHousing.Services.Masters
 
     public interface IGendersService
     {
-        Task<dynamic> GetSelectListAsync();
+        IQueryable<Gender> GetAllActive(bool isTracking = false);
     }
 }

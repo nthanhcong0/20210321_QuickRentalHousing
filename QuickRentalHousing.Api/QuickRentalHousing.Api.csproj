@@ -29,13 +29,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuickRentalHousing.Domains\QuickRentalHousing.Domains.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
     <ProjectReference Include="..\QuickRentalHousing.Services\QuickRentalHousing.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\QuickRentalHousing.Api.Models\QuickRentalHousing.Api.Models.csproj">
+    <ProjectReference Include="..\QuickRentalHousing.Models\QuickRentalHousing.Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

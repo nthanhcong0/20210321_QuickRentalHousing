@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QuickRentalHousing.Api.Models.Tenants
+namespace QuickRentalHousing.Models.Tenants
 {
-    public class CreateTenantModel
+    public class CreateTenantRequestModel
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

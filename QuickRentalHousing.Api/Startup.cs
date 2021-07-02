@@ -85,6 +85,18 @@ namespace QuickRentalHousing.Api
 
             var assemblyNameOfServiceProject = typeof(ITenantsService).Assembly.GetName().Name;
             services.RegisterNonGenericClassesInAssemblyAsScoped(assemblyNameOfServiceProject);
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins(new string[] {
+                            "https://localhost:5002",
+                        }).AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +112,8 @@ namespace QuickRentalHousing.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

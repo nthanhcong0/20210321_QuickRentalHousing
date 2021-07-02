@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickRentalHousing.Api.Controllers.Bases;
-using QuickRentalHousing.Api.Models.Homeowners;
-using QuickRentalHousing.Services.Masters;
+using QuickRentalHousing.Models.Homeowners;
+using QuickRentalHousing.Services.Homeowners;
 using System;
 using System.Threading.Tasks;
 
@@ -9,29 +9,17 @@ namespace QuickRentalHousing.Api.Controllers
 {
     public class HomeownersController : ApiControllerBase
     {
-        private readonly IHomeownersService _homeownersService;
+        private readonly IHomeownerModuleService _homeownerModuleService;
 
-        public HomeownersController(IHomeownersService homeownersService)
+        public HomeownersController(IHomeownerModuleService homeownerModuleService)
         {
-            _homeownersService = homeownersService;
+            _homeownerModuleService = homeownerModuleService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(CreateHomeownerModel model)
+        public async Task<IActionResult> CreateAsync(CreateHomeownerRequestModel model)
         {
-            await _homeownersService.CreateAsync(model.FirstName,
-                model.MiddleName,
-                model.LastName,
-                model.GenderId,
-                model.PID,
-                model.DOB,
-                model.AddressNumber,
-                model.StreetId,
-                model.StreetName,
-                model.DisttrictId,
-                model.PhoneNumbers,
-                model.Emails,
-                model.Description,
+            await _homeownerModuleService.CreateAsync(model,
                 ExecutedBy,
                 DateTime.UtcNow);
 
@@ -41,7 +29,7 @@ namespace QuickRentalHousing.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            var result = await _homeownersService.GetAsync();
+            var result = await _homeownerModuleService.GetAllAsync();
 
             return Ok(result);
         }
@@ -49,32 +37,29 @@ namespace QuickRentalHousing.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(Guid id)
         {
-            var result = await _homeownersService.GetAsync(id);
+            var result = await _homeownerModuleService.GetAsync(id);
 
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(UpdateHomeownerModel model)
+        public async Task<IActionResult> UpdateAsync(UpdateHomeownerRequestModel model)
         {
-            var result = await _homeownersService.UpdateAsync(model.Id,
-                model.FirstName,
-                model.MiddleName,
-                model.LastName,
-                model.GenderId,
-                model.PID,
-                model.DOB,
-                model.AddressNumber,
-                model.StreetId,
-                model.StreetName,
-                model.DisttrictId,
-                model.PhoneNumbers,
-                model.Emails,
-                model.Description,
+            var result = await _homeownerModuleService.UpdateAsync(model,
                 ExecutedBy,
                 DateTime.UtcNow);
 
             return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(Guid id)
+        {
+            await _homeownerModuleService.DeleteAsync(id,
+                ExecutedBy,
+                DateTime.UtcNow);
+
+            return Ok();
         }
     }
 }

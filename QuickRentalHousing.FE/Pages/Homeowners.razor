@@ -1,0 +1,135 @@
+﻿@using Microsoft.AspNetCore.Authorization;
+@using QuickRentalHousing.FE.Services;
+@using QuickRentalHousing.FE.Extensions;
+
+@page "/homeowners"
+@attribute [Authorize]
+@inject IGenderModuleService _genderModuleService
+@inject IDistrictModuleService _districtModuleService
+@inject IHomeownersService _homeownersService
+
+<h3>Homeowners</h3>
+<div class="row">
+    <div class="col-12">
+        <EditForm Model="this" OnValidSubmit="Submit">
+            <div class="form-row">
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="FirstName">First Name</label>
+                    <input id="FirstName" class="form-control" @bind-value="FirstName">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="MiddleName">Middle Name</label>
+                    <input id="MiddleName" class="form-control" @bind="MiddleName">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="LastName">Last Name</label>
+                    <input id="LastName" class="form-control" @bind="LastName">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="Gender">Gender</label>
+                    <select id="Gender" class="form-control" @bind="GenderId">
+                        @foreach (var item in _genderSelectionModels)
+                        {
+                            <option value="@(item.Id)">@(item.Name)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="PID">Personal ID</label>
+                    <input id="PID" class="form-control" @bind="PID">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="DOB">Date Of Birth</label>
+                    <input id="DOB" class="form-control" @bind="DOB" @bind:format="dd/MM/yyyy">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="AddressNumber">Address Number</label>
+                    <input id="AddressNumber" class="form-control" @bind="AddressNumber">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="Street">Street</label>
+                    <input id="Street" class="form-control" @bind="StreetName">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="District">District</label>
+                    <select id="District" class="form-control" @bind="DistrictId">
+                        @foreach (var item in _districtSelectionModels)
+                        {
+                            <option value="@(item.Id)">@(item.Name)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="PhoneNumber">Phone Number</label>
+                    <input id="PhoneNumber" class="form-control" @bind="PhoneNumber">
+                </div>
+                <div class="form-group col-md-6 col-lg-3 col-xl-2">
+                    <label for="Email">Email</label>
+                    <input id="Email" class="form-control" @bind="Email">
+                </div>
+                <div class="form-group col-12">
+                    <label for="Description">Description</label>
+                    <textarea id="Description" class="form-control" @bind="Description"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary" @onclick="Reset">Reset</button>
+        </EditForm>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Personal ID</th>
+                        <th scope="col">Date Of Birth</th>
+                        <th scope="col">Address Number</th>
+                        <th scope="col">Street</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Description</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{long i = 1; }
+                    @foreach (var item in _homeownerModel)
+                    {
+                        <tr>
+                            <th scope="row" @onclick="@(async () => await LoadAsync(item.Id))">@(i++)</th>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.FirstName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.MiddleName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.LastName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.GenderName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.PID</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.DOB.ToString_ddMMyyyy()</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.AddressNumber</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.StreetName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.DistrictName</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.PhoneNumbers?.FirstOrDefault()</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.Emails?.FirstOrDefault()</td>
+                            <td @onclick="@(async () => await LoadAsync(item.Id))">@item.Description</td>
+                            <td>
+                                <button class="btn btn-secondary" @onclick="@(async () => await RemoveAsync(item.Id))">
+                                    <span class="oi oi-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

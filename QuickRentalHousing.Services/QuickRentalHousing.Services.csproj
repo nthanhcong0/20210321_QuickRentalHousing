@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickRentalHousing.Domains\QuickRentalHousing.Domains.csproj" />
+    <ProjectReference Include="..\QuickRentalHousing.Models\QuickRentalHousing.Models.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ITHenry.Commons.EntityFrameworkCore">

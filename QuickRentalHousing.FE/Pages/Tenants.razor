@@ -1,8 +1,8 @@
-﻿@page "/managehos"
+﻿@page "/tenants"
 @using Microsoft.AspNetCore.Authorization;
 @attribute [Authorize]
 
-<h3>Manage Home-Owners</h3>
+<h3>Tenants</h3>
 <div class="form-row">
     <div class="form-group col-md-6">
         <label asp-for="FirstName">First Name</label>
@@ -39,6 +39,10 @@
     <div class="form-group col-md-6">
         <label asp-for="District">District</label>
         <input class="form-control" asp-for="District">
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Occupation">Occupation</label>
+        <input class="form-control" asp-for="Occupation">
     </div>
     <div class="form-group col-md-6">
         <label asp-for="Description">Description</label>

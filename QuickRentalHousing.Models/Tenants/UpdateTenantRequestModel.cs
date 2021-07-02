@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QuickRentalHousing.Api.Models.Homeowners
+namespace QuickRentalHousing.Models.Tenants
 {
-    public class UpdateHomeownerModel
+    public class UpdateTenantRequestModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

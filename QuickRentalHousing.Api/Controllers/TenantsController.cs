@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuickRentalHousing.Api.Controllers.Bases;
-using QuickRentalHousing.Api.Models.Tenants;
+using QuickRentalHousing.Models.Tenants;
 using QuickRentalHousing.Services.Masters;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace QuickRentalHousing.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(CreateTenantModel model)
+        public async Task<IActionResult> CreateAsync(CreateTenantRequestModel model)
         {
             await _tenantsService.CreateAsync(model.FirstName,
                 model.MiddleName,
@@ -57,7 +57,7 @@ namespace QuickRentalHousing.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(UpdateTenantModel model)
+        public async Task<IActionResult> UpdateAsync(UpdateTenantRequestModel model)
         {
             var result = await _tenantsService.UpdateAsync(model.Id,
                 model.FirstName,

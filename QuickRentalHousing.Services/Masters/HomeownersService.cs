@@ -55,73 +55,19 @@ namespace QuickRentalHousing.Services.Masters
             return result;
         }
 
-        public async Task<dynamic> GetAsync()
+        public IQueryable<Homeowner> GetAllActive(bool isTracking = false)
         {
-            var result = await GetAllActive()
-                .Select(x => new
-                {
-                    x.Id,
-                    x.FirstName,
-                    x.MiddleName,
-                    x.LastName,
-                    GenderName = x.Gender.Name,
-                    x.PID,
-                    x.DOB,
-                    x.AddressNumber,
-                    StreetName = x.Street.Name,
-                    DistrictName = x.District.Name,
-                    PhoneNumbers = x.HomeownerPhones.Where(y => y.IsActive)
-                        .Select(x => x.PhoneNumber)
-                        .ToArray(),
-                    Emails = x.HomeownerEmails.Where(y => y.IsActive)
-                        .Select(x => x.Email)
-                        .ToArray(),
-                    x.Description,
-                }).ToArrayAsync();
+            var result = _repository.GetAll(isTracking)
+                .Where(x => x.IsActive);
 
             return result;
         }
 
-        public async Task<dynamic> GetAsync(Guid id)
+        public IQueryable<Homeowner> GetActiveById(Guid id,
+            bool isTracking = false)
         {
-            var result = await GetActiveById(id)
-                .Select(x => new
-                {
-                    x.Id,
-                    x.FirstName,
-                    x.MiddleName,
-                    x.LastName,
-                    Gender = new
-                    {
-                        x.GenderId,
-                        x.Gender.Name
-                    },
-                    x.PID,
-                    x.DOB,
-                    x.AddressNumber,
-                    Street = new
-                    {
-                        x.StreetId,
-                    },
-                    District = new
-                    {
-                        x.DistrictId,
-                        x.District.Name,
-                    },
-                    PhoneNumbers = x.HomeownerPhones.Where(y => y.IsActive)
-                        .Select(x => new
-                        {
-                            x.Id,
-                            x.PhoneNumber
-                        }).ToArray(),
-                    Emails = x.HomeownerEmails.Where(y => y.IsActive)
-                        .Select(x => new
-                        {
-                            x.Id,
-                            x.Email
-                        }).ToArray(),
-                    x.Description,
-                }).FirstOrDefaultAsync();
+            var result = GetAllActive(isTracking)
+                .Where(x => x.Id == id);
 
             return result;
         }
@@ -268,23 +214,6 @@ namespace QuickRentalHousing.Services.Masters
 
             return result;
         }
-
-        private IQueryable<Homeowner> GetAllActive(bool isTracking = false)
-        {
-            var result = _repository.GetAll(isTracking)
-                .Where(x => x.IsActive);
-
-            return result;
-        }
-
-        private IQueryable<Homeowner> GetActiveById(Guid id,
-            bool isTracking = false)
-        {
-            var result = GetAllActive(isTracking)
-                .Where(x => x.Id == id);
-
-            return result;
-        }
     }
 
     public interface IHomeownersService
@@ -304,8 +233,9 @@ namespace QuickRentalHousing.Services.Masters
             string description,
             Guid executedBy,
             DateTime executedTime);
-        Task<dynamic> GetAsync();
-        Task<dynamic> GetAsync(Guid id);
+        IQueryable<Homeowner> GetAllActive(bool isTracking = false);
+        IQueryable<Homeowner> GetActiveById(Guid id,
+            bool isTracking = false);
         Task<Homeowner> UpdateAsync(Guid id,
             string firstName,
             string middleName,
