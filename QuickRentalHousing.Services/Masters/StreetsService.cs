@@ -81,7 +81,7 @@ namespace QuickRentalHousing.Services.Masters
             return result;
         }
 
-        private IQueryable<Street> GetAllActive(bool isTracking = false)
+        public IQueryable<Street> GetAllActive(bool isTracking = false)
         {
             var result = _repository.GetAll(isTracking)
                 .Where(x => x.IsActive);
@@ -114,5 +114,7 @@ namespace QuickRentalHousing.Services.Masters
             string description,
             Guid executedBy,
             DateTime executedTime);
+
+        IQueryable<Street> GetAllActive(bool isTracking = false);
     }
 }
